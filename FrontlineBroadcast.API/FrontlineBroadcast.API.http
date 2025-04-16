@@ -1,6 +1,39 @@
-@FrontlineBroadcast.API_HostAddress = http://localhost:5269
+@host = http://localhost:5269
+@contentType = application/json
 
-GET {{FrontlineBroadcast.API_HostAddress}}/weatherforecast/
-Accept: application/json
+### Get all notifications
+GET {{host}}/api/notifications
+Accept: {{contentType}}
 
-###
+### Get active notifications
+GET {{host}}/api/notifications/active
+Accept: {{contentType}}
+
+### Get notification by ID
+GET {{host}}/api/notifications/1
+Accept: {{contentType}}
+
+### Create a notification
+POST {{host}}/api/notifications
+Content-Type: {{contentType}}
+
+{
+  "title": "New Policy Update",
+  "message": "There is a new company policy regarding remote work. Please check your email for details.",
+  "expiresAt": "2025-05-16T00:00:00Z"
+}
+
+### Update a notification
+PUT {{host}}/api/notifications/1
+Content-Type: {{contentType}}
+
+{
+  "id": 1,
+  "title": "System Maintenance - UPDATED",
+  "message": "The system maintenance has been rescheduled to tomorrow night from 11PM to 1AM.",
+  "createdAt": "2025-04-16T12:00:00Z",
+  "expiresAt": "2025-04-17T23:59:59Z"
+}
+
+### Delete a notification
+DELETE {{host}}/api/notifications/2
